@@ -1,10 +1,10 @@
-package service;
+package service.impl;
 
-import interfaces.IPrinter;
-import interfaces.IUserInvoiceService;
-import interfaces.IValidation;
+import service.IUserInvoiceService;
+import service.IValidator;
 import model.Invoice;
 import model.User;
+import service.IPrinter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,16 +13,16 @@ public class UserInvoiceService implements IUserInvoiceService {
 
     private List<Invoice> allInvoices;
     private IPrinter printer;
-    private IValidation validation;
+    private IValidator validator;
 
-    public UserInvoiceService(IPrinter printer, IValidation validation) {
+    public UserInvoiceService(IPrinter printer, IValidator validator) {
         this.printer = printer;
-        this.validation = validation;
+        this.validator = validator;
         allInvoices = new ArrayList<>();
     }
 
     public void addInvoice(User user, Invoice invoice) {
-        validation.checkLimit(user, invoice);
+        validator.checkLimit(user, invoice);
         printer.printAddedInvoice(user, invoice);
         allInvoices.add(invoice);
     }

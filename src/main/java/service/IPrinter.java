@@ -1,4 +1,4 @@
-package interfaces;
+package service;
 
 import model.Invoice;
 import model.User;

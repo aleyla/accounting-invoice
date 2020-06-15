@@ -1,12 +1,12 @@
-package service;
+package service.impl;
 
-import interfaces.IPrinter;
+import service.IPrinter;
 import model.Invoice;
 import model.User;
 
 import java.util.List;
 
-public class Printer implements IPrinter {
+public class ConsolePrinter implements IPrinter {
 
     @Override
     public String report(List<Invoice> invoices) {

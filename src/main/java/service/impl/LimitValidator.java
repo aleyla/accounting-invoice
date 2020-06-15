@@ -1,12 +1,12 @@
-package service;
+package service.impl;
 
-import interfaces.IValidation;
+import service.IValidator;
 import model.Invoice;
 import model.User;
 
 import java.math.BigDecimal;
 
-public class LimitValidation implements IValidation {
+public class LimitValidator implements IValidator {
 
     private static final BigDecimal LIMIT = new BigDecimal(200);
 

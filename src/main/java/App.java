@@ -1,8 +1,8 @@
 import model.Invoice;
 import model.User;
-import service.LimitValidation;
-import service.Printer;
-import service.UserInvoiceService;
+import service.impl.ConsolePrinter;
+import service.impl.LimitValidator;
+import service.impl.UserInvoiceService;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -15,7 +15,7 @@ public class App {
 
         Map<User, User> userMap = new HashMap<>();
 
-        UserInvoiceService userInvoiceService = new UserInvoiceService(new Printer(), new LimitValidation());
+        UserInvoiceService userInvoiceService = new UserInvoiceService(new ConsolePrinter(), new LimitValidator());
 
         User user1 = new User("John", "Doe", "john@doe.com");
         userInvoiceService.addInvoice(user1, new Invoice(new BigDecimal(200), "IPhone 8", "TR0001"));
@@ -41,22 +41,28 @@ public class App {
         userInvoiceService.printUser(user3);
 
 
-        System.out.print("Enter new accounting invoice or write 'X' for exit : ");
+        String message = "Enter new accounting invoice or write 'X' for exit, 'R' for report : ";
+        System.out.print(message);
         Scanner scanner = new Scanner(System.in);
         String inputString = scanner.nextLine();
 
         while (!"X".equalsIgnoreCase(inputString)) {
-            String[] splitted = inputString.split(",");
-            if (splitted.length < 6) {
-                System.out.println("Please check invoice");
-            } else {
-                User user = new User(splitted[0], splitted[1], splitted[2]);
-                userInvoiceService.addInvoice(userMap.getOrDefault(user, user), new Invoice(new BigDecimal(splitted[3]), splitted[4], splitted[5]));
-            }
-            System.out.print("Enter new accounting invoice or write 'X' for exit : ");
-            inputString = scanner.nextLine();
-        }
 
-        userInvoiceService.report();
+            if ("R".equalsIgnoreCase(inputString)) {
+                userInvoiceService.report();
+                System.out.print(message);
+                inputString = scanner.nextLine();
+            } else {
+                String[] splitted = inputString.split(",");
+                if (splitted.length < 6) {
+                    System.out.println("Please check invoice");
+                } else {
+                    User user = new User(splitted[0], splitted[1], splitted[2]);
+                    userInvoiceService.addInvoice(userMap.getOrDefault(user, user), new Invoice(new BigDecimal(splitted[3]), splitted[4], splitted[5]));
+                }
+                System.out.print(message);
+                inputString = scanner.nextLine();
+            }
+        }
     }
 }
