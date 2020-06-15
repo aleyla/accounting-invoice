@@ -20,24 +20,12 @@ public class Invoice {
         return amount;
     }
 
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
     public String getProductName() {
         return productName;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
     public String getBillNo() {
         return billNo;
-    }
-
-    public void setBillNo(String billNo) {
-        this.billNo = billNo;
     }
 
     public Boolean getAdded() {
