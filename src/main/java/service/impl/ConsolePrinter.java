@@ -1,8 +1,8 @@
 package service.impl;
 
-import service.IPrinter;
 import model.Invoice;
 import model.User;
+import service.IPrinter;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class ConsolePrinter implements IPrinter {
     @Override
     public void printUserInvoices(User user) {
         user.getInvoices().forEach(invoice -> {
-            printAddedInvoice(user, invoice);
+            System.out.println(formatUser(user, invoice) + "->" + (invoice.getAdded() ? "KABUL EDILDI" : "RED EDILD"));
         });
     }
 

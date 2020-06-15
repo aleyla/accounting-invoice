@@ -37,7 +37,7 @@ public class App {
 
         userInvoiceService.report();
 
-        System.out.println(user3.toString() + " invoices");
+        System.out.println("USER RAPOR :" + user3.toString());
         userInvoiceService.printUser(user3);
 
 
